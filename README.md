@@ -38,7 +38,7 @@ uname -r
 uname -v
 ```
 
-## Adding ro.boot.vbmeta.digest value
+## Adding ro.boot.vbmeta.digest value (Will be deprecated in the next release and Latest CI)
 This module will now have a directory called `VerifiedBootHash` in `/data/adb` containing `VerifiedBootHash.txt` for users with missing `ro.boot.vbmeta.digest` value to prevent partition modified and abnormal boot state detection. 
 - Copy your VerifiedBootHash in the Key Attestation demo and paste it to `/data/adb/VerifiedBootHash/VerifiedBootHash.txt`
 

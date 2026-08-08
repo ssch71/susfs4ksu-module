@@ -141,33 +141,6 @@ if [ -d /data/adb/susfs4ksu ]; then
 susfs4ksu_config_check
 fi
 
-prop_value=$(getprop ro.boot.vbmeta.digest)
-HASH_DIR=/data/adb/VerifiedBootHash
-if ${KSU_BIN} module list | grep -qE "vbmeta-fixer|TA_utl"; then
-	ui_print "****************************************"
-	ui_print "! vbmeta-fixer or Tricky Addon module detected"
-	ui_print "! skipping VerifiedBootHash creation"
-	ui_print "****************************************"
-else
-	if [ -z "$prop_value" ]; then
-		ui_print "[!] Property ro.boot.vbmeta.digest is empty, generate VerifiedBootHash directory"
-		if [ ! -d "$HASH_DIR" ]; then
-		ui_print "[-] Creating VerifiedBootHash directory"
-		mkdir -p "$HASH_DIR"
-		[ ! -f "$HASH_DIR/VerifiedBootHash.txt" ] && touch "$HASH_DIR/VerifiedBootHash.txt"
-		fi
-		ui_print "****************************************"
-		ui_print "! Please copy your VerifiedBootHash in Key Attestation demo"
-		ui_print "! And Paste it to /data/adb/VerifiedBootHash/VerifiedBootHash.txt"
-		ui_print "****************************************"
-	else
-		ui_print "****************************************"
-		ui_print "! Property ro.boot.vbmeta.digest has a value"
-		ui_print "! skipping VerifiedBootHash creation"
-		ui_print "****************************************"
-	fi
-fi
-
 ui_print "[-] Preparing susfs4ksu persistent directory"
 PERSISTENT_DIR=/data/adb/susfs4ksu
 [ ! -d /data/adb/susfs4ksu ] && mkdir -p $PERSISTENT_DIR
